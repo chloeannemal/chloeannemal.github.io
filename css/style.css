@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: snow;
+  background: linear-gradient(160deg, rgb(255, 250, 250) 0%, rgb(243, 247, 255) 55%, rgb(232, 240, 250) 100%);
 }
 
 /***************   Nav Section **********************/
@@ -24,6 +24,16 @@ body {
 .nav a {
   text-decoration: none;
   color: inherit;
+  transition: color 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+  padding: 6px 10px;
+  border-radius: 8px;
+}
+
+.nav a:hover,
+.nav a:focus-visible {
+  color: #172c71;
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-1px);
 }
 /***********************  Footer Section   **************************/
 footer {
@@ -70,6 +80,14 @@ header img {
   border: 2px solid rgb(216, 210, 210);
   box-sizing: border-box;
   border-radius: 50%;
+  filter: contrast(1.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+header img:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 16px rgba(106, 106, 106, 0.28);
+  border-color: rgb(190, 190, 190);
 }
 
 .address {
@@ -95,13 +113,19 @@ hr {
   margin: 24px 0;
 }
 
+section {
+  max-width: 1080px;
+  margin: 0 auto 28px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
 section h3 {
   color: #172c71;
   font-family: "Montserrat", Arial, sans-serif;
   font-style: italic;
   font-size: 1.4rem;
-  margin-bottom: 0.5rem;
-  max-width: 1080px;
+  margin: 0 0 0.5rem;
   box-sizing: border-box;
 }
 
@@ -110,7 +134,7 @@ section h4 {
   font-family: "Montserrat", Arial, sans-serif;
   font-style: italic;
   font-size: 1rem;
-  margin-bottom: 0.5rem;
+  margin: 0 0 0.5rem;
   box-sizing: border-box;
 }
 
@@ -119,21 +143,25 @@ section dl {
   font-family: "Montserrat", Arial, sans-serif;
   font-style: italic;
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: minmax(240px, 1fr) minmax(160px, 240px);
   gap: 0.4rem 1rem;
-  margin: 0 auto 12px;
-  padding: 0 20px;
+  margin: 0 0 12px;
+  padding: 0;
   box-sizing: border-box;
+}
+
+section dt,
+section dd {
+  margin: 0;
 }
 
 section ul {
   color: #1f3a93;
   list-style-type: disc;
-  padding-left: 20px;
   font-family: "Montserrat", Arial, sans-serif;
   font-style: italic;
-  margin: 0 auto 12px;
-  padding: 0 20px;
+  margin: 0 0 12px;
+  padding: 0 0 0 20px;
   box-sizing: border-box;
 }
 
@@ -148,14 +176,37 @@ section a:hover {
 
 /**************   Projects   *****************/
 .three-col {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
   gap: 20px;
-  max-width: 1080px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 20px;
+  padding: 0;
   box-sizing: border-box;
+}
+
+.three-col .card {
+  width: min(100%, 320px);
+}
+
+.card {
+  padding: 20px 24px;
+  background-color: rgb(225, 225, 225);
+  border-radius: 5px;
+  box-shadow: 0 3px 3px rgba(106, 106, 106, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(106, 106, 106, 0.28);
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 20px;
 }
 
 .card img {
@@ -168,18 +219,10 @@ section a:hover {
   border-radius: 5px;
 }
 
-.card {
-  padding: 20px 30px;
-  background-color: rgb(225, 225, 225);
-  border-radius: 5px;
-  box-shadow: 0 3px 3px rgba(106, 106, 106, 0.35);
-}
-
 /**************   Responsiveness   *****************/
 @media (max-width: 680px) {
   nav, .three-col {
     flex-direction: column;
-    grid-template-columns: 1fr;
   }
 
   nav {
@@ -195,9 +238,17 @@ section a:hover {
     background-color: rgba(255, 255, 255, 0.35);
   }
 
+  section {
+    padding: 0 16px;
+  }
+
+  section dl {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
   .three-col {
     justify-items: center;
-    padding: 0 16px;
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
@@ -221,11 +272,15 @@ section a:hover {
   grid-template-columns: 1fr;
   gap: 10px;
   max-width: 520px;
-  margin: 24px auto;
-  padding: 16px;
+  margin: 0 auto;
+  padding: 0;
   color: #172c71;
   font-family: "Montserrat", Arial, sans-serif;
   font-style: italic;
+}
+
+.one-col label {
+  font-weight: 700;
 }
 
 input {
@@ -249,4 +304,23 @@ textarea {
   font-style: italic;
   min-height: 140px;
   resize: vertical;
+}
+
+button[type="submit"] {
+  width: fit-content;
+  padding: 10px 16px;
+  border: 1px solid rgb(216, 210, 210);
+  border-radius: 10px;
+  background-color: rgb(239, 234, 234);
+  color: #172c71;
+  font-family: "Montserrat", Arial, sans-serif;
+  font-style: italic;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+button[type="submit"]:hover,
+button[type="submit"]:focus-visible {
+  background-color: rgb(225, 225, 225);
+  border-color: rgb(190, 190, 190);
 }
